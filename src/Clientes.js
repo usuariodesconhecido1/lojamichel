@@ -1,9 +1,12 @@
 import Header from "./modules/header";
 import Footer from "./modules/footer";
-import './index.css'
 import supabase from "./supabase";
 import { useEffect, useState } from "react";
 import ReactModal from 'react-modal';
+import { insertMaskInCpf } from "./mascaras/cpf.ts";
+import { insertMaskInPhone } from "./mascaras/phone.ts";
+import './index.css'
+
 
 
 export default function Clientes() {
@@ -249,10 +252,10 @@ export default function Clientes() {
               {clientes.map((cliente) => (
                 <tr key={cliente.id}>
                   <td>{cliente.nome}</td>
-                  <td>{cliente.cpf}</td>
+                  <td>{insertMaskInCpf(cliente.cpf)}</td>
                   <td>{cliente.rua}, {cliente.nres} - {cliente.bairro} AP: {cliente.ap}</td>
                   <td>{cliente.cidade}, {cliente.estado}</td>
-                  <td>{cliente.celular}</td>
+                  <td>{insertMaskInPhone(cliente.celular)}</td>
                   <td>{formatter.format(new Date(cliente.aniversario))}</td>
                   <td>
                     <div className="buttonContainer">
